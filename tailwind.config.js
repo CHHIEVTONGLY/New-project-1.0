@@ -1,12 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+          fontFamily: {
+        Helvetica: "Helvetica",
+        Roboto: "Roboto",
+      },
+    extend: {
+      fontSize: {
+        largest: "5rem",
+        larger: "20px",
+      },
+
+      maxWidth: {
+        _800px: "800px",
+      },
+      maxHeight: {
+        _500px: "500px",
+      },
+    },
   },
   plugins: [],
-}
-
+};

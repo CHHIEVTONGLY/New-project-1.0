@@ -1,12 +1,16 @@
 <template>
   <div>
-    <h1>Hello world</h1>
+    <NavigationBarVue></NavigationBarVue>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import NavigationBarVue from "./views/NavigationBar.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    NavigationBarVue,
+  },
 };
 </script>
