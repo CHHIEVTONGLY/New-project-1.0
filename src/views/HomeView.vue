@@ -1,19 +1,21 @@
 <template>
-  <div class="px-24 py-12 flex flex-row">
+  <div class="px-16 py-12 flex flex-row gap-2">
     <div class="basis-3/4">
       <news-component></news-component>
     </div>
     <div class="basis-1/4">
-      <h1>Testing</h1>
+      <popular-post></popular-post>
     </div>
   </div>
 </template>
 
 <script>
 import NewsComponent from "@/components/NewsComponent.vue";
+import PopularPost from "@/components/PopularPost.vue";
 export default {
   components: {
     NewsComponent,
+    PopularPost,
   },
 };
 </script>
