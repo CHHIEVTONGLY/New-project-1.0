@@ -17,5 +17,6 @@ export default {
     NewsComponent,
     PopularPost,
   },
+  data(){}
 };
 </script>
