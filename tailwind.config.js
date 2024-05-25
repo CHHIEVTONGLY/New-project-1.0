@@ -10,6 +10,7 @@ module.exports = {
       fontSize: {
         largest: "5rem",
         larger: "24px",
+        larger_1: "36px",
       },
 
       maxWidth: {
@@ -17,6 +18,9 @@ module.exports = {
       },
       maxHeight: {
         _500px: "500px",
+      },
+      borderWidth: {
+        _1: "1.5px",
       },
     },
   },
