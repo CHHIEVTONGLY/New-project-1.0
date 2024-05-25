@@ -1,11 +1,11 @@
 <template>
-  <div class="flex border-2 border-black mb-4">
+  <div class="flex flex-col md:flex-row border-2 border-black mb-4">
     <img
       src="https://media.istockphoto.com/id/1369150014/vector/breaking-news-with-world-map-background-vector.jpg?s=612x612&w=0&k=20&c=9pR2-nDBhb7cOvvZU_VdgkMmPJXrBQ4rB1AkTXxRIKM="
       alt="news-img"
-      class="object-cover max-w-96 max-h-_500px"
+      class="object-cover w-full h-64 md:w-96 md:h-auto"
     />
-    <div class="flex flex-col justify-between ml-4">
+    <div class="flex flex-col justify-between p-4">
       <div>
         <p class="text-gray-500">John Doe, March 11, 2024</p>
         <h1 class="text-xl font-bold">Title</h1>
@@ -16,11 +16,11 @@
           ab.
         </p>
       </div>
-      <div class="mt-auto mb-4">
+      <div class="mt-4 md:mt-auto">
         <!-- This div will stay at the bottom -->
         <button
           class="group relative inline-block cursor-pointer focus:outline-none focus:ring"
-          href="#"
+          @click="click()"
         >
           <span
             class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
@@ -38,5 +38,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    click() {
+      this.$router.push({ name: "NewsShowing" });
+    },
+  },
+};
 </script>

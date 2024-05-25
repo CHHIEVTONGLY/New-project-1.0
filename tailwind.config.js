@@ -2,14 +2,14 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
-          fontFamily: {
-        Helvetica: "Helvetica",
-        Roboto: "Roboto",
-      },
+    fontFamily: {
+      Helvetica: "Helvetica",
+      Roboto: "Roboto",
+    },
     extend: {
       fontSize: {
         largest: "5rem",
-        larger: "20px",
+        larger: "24px",
       },
 
       maxWidth: {

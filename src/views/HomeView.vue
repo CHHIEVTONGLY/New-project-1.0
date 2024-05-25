@@ -1,9 +1,9 @@
 <template>
   <div class="px-16 py-12 flex flex-row gap-2">
-    <div class="basis-3/4">
+    <div class="md:basis-3/4">
       <news-component></news-component>
     </div>
-    <div class="basis-1/4">
+    <div class=" hidden md:block basis-1/4">
       <popular-post></popular-post>
     </div>
   </div>
