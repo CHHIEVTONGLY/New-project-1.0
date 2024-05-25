@@ -12,10 +12,9 @@
       class="flex justify-center flex-wrap gap-4 sm:gap-10 text-lg sm:text-xl lg:text-2xl mt-12"
     >
       <a href="/" class="block px-3 py-2">HOME</a>
-      <a href="#" class="block px-3 py-2">LOCAL</a>
-      <a href="#" class="block px-3 py-2">WORLD</a>
+      <a href="/local" class="block px-3 py-2">LOCAL</a>
+      <a href="/world" class="block px-3 py-2">WORLD</a>
       <a href="#" class="block px-3 py-2">ABOUT</a>
-      <a href="#" class="block px-3 py-2">CONTACT</a>
     </div>
   </div>
 </template>

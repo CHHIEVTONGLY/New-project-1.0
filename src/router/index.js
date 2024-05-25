@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
 import NewsShowing from "@/views/NewsShowing.vue";
+import LocalNews from "@/views/LocalNews.vue";
+import WorldNews from "@/views/WorldNews.vue";
 
 const routes = [
   {
@@ -13,6 +15,16 @@ const routes = [
     path: "/showing",
     name: "NewsShowing",
     component: NewsShowing,
+  },
+  {
+    path: "/local",
+    name: "LocalNews",
+    component: LocalNews,
+  },
+  {
+    path: "/world",
+    name: "WorldNews",
+    component: WorldNews,
   },
 ];
 

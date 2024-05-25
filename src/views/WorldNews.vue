@@ -8,7 +8,7 @@
     <div class="flex flex-col justify-between p-4">
       <div>
         <p class="text-gray-500">John Doe, March 11, 2024</p>
-        <h1 class="text-xl font-bold">Title</h1>
+        <h1 class="text-xl font-bold">WorldNews</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. A sed quo
           sapiente assumenda nulla soluta vel veritatis, eligendi voluptatum
@@ -42,13 +42,6 @@ export default {
   methods: {
     click() {
       this.$router.push({ name: "NewsShowing" });
-    },
-    limitLength(text, maxLength) {
-      if (text.length <= maxLength) {
-        return text;
-      } else {
-        return text.substring(0, maxLength) + "...";
-      }
     },
   },
 };
