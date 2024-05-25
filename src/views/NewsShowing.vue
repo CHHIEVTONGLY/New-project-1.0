@@ -9,7 +9,7 @@
           {{ newsData.paragraph }}
         </p>
         <div class="mt-auto">
-          <h1 class="text-gray-500">1821 Views</h1>
+          <h1 class="text-gray-500">{{ newsData.view }} Views</h1>
         </div>
       </div>
     </div>
@@ -71,15 +71,31 @@ export default {
 
   methods: {
     async fetchNews() {
-      await axios
-        .get(`http://localhost:3000/localnews/${this.$route.params.news}`)
+      const newsType = this.$route.params.newsType; // Get the news type from route params
+      const newsId = this.$route.params.id; // Get the news ID from route params
 
-        .then((response) => {
-          this.newsData = response.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      let apiUrl = "";
+      let updateView = "";
+
+      // Determine API endpoint based on news type
+      if (newsType === "local") {
+        apiUrl = `http://localhost:3000/localnews/${newsId}`;
+        updateView = `http://localhost:3000/localnews/update/${newsId}`;
+      } else if (newsType === "world") {
+        apiUrl = `http://localhost:3000/worldnews/${newsId}`;
+        updateView = `http://localhost:3000/worldnews/update/${newsId}`;
+      } else {
+        console.error("Invalid news type.");
+        return;
+      }
+
+      try {
+        const response = await axios.get(apiUrl);
+        await axios.put(updateView)
+        this.newsData = response.data;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     },
   },
 };

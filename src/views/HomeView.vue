@@ -3,7 +3,7 @@
     <div class="md:basis-3/4">
       <news-component></news-component>
     </div>
-    <div class=" hidden md:block basis-1/4">
+    <div class="hidden md:block basis-1/4">
       <popular-post></popular-post>
     </div>
   </div>
@@ -17,6 +17,6 @@ export default {
     NewsComponent,
     PopularPost,
   },
-  data(){}
+
 };
 </script>
