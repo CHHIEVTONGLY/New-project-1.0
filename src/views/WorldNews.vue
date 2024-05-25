@@ -112,7 +112,7 @@ export default {
         const response = await axios.get(
           `http://localhost:3000/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
         );
-        const count = await axios.get("http://localhost:3000/localnews/total");
+        const count = await axios.get("http://localhost:3000/worldnews/total");
         const tPage = count;
         this.totalPage = tPage.data.totalCount;
         this.worldNewsData = response.data;
