@@ -11,9 +11,9 @@
     <div
       class="flex justify-center flex-wrap gap-4 sm:gap-10 text-lg sm:text-xl lg:text-2xl mt-12"
     >
-      <a href="/" class="block px-3 py-2">HOME</a>
-      <a href="/local" class="block px-3 py-2">LOCAL</a>
-      <a href="/world" class="block px-3 py-2">WORLD</a>
+      <router-link to="/" class="block px-3 py-2">HOME</router-link>
+      <router-link to="/local" class="block px-3 py-2">LOCAL</router-link>
+      <router-link to="/world" class="block px-3 py-2">WORLD</router-link>
       <a href="#" class="block px-3 py-2">ABOUT</a>
     </div>
   </div>
