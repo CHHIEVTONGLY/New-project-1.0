@@ -64,7 +64,7 @@ export default {
       }
     },
     async fetchData() {
-      const response = await axios.get("http://localhost:3000/localnews/few");
+      const response = await axios.get("http://localhost:3000/api/localnews/few");
       this.newsData = response.data;
       console.log(this.newsData);
     },

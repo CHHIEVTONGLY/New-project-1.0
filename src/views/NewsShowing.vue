@@ -79,11 +79,11 @@ export default {
 
       // Determine API endpoint based on news type
       if (newsType === "local") {
-        apiUrl = `http://localhost:3000/localnews/${newsId}`;
-        updateView = `http://localhost:3000/localnews/update/${newsId}`;
+        apiUrl = `http://localhost:3000/api/localnews/${newsId}`;
+        updateView = `http://localhost:3000/api/localnews/update/${newsId}`;
       } else if (newsType === "world") {
-        apiUrl = `http://localhost:3000/worldnews/${newsId}`;
-        updateView = `http://localhost:3000/worldnews/update/${newsId}`;
+        apiUrl = `http://localhost:3000/api/worldnews/${newsId}`;
+        updateView = `http://localhost:3000/api/worldnews/update/${newsId}`;
       } else {
         console.error("Invalid news type.");
         return;
