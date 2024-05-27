@@ -66,7 +66,6 @@ export default {
     async fetchData() {
       const response = await axios.get("http://localhost:3000/api/localnews/few");
       this.newsData = response.data;
-      console.log(this.newsData);
     },
     getData(news) {
       if (news) {
