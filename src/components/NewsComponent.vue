@@ -57,7 +57,6 @@ export default {
       this.$router.push({ name: "NewsShowing" });
     },
     limitLength(text, maxLength) {
-      if (!text) return ""; // Add null check
       if (text.length <= maxLength) {
         return text;
       } else {
