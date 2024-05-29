@@ -110,9 +110,9 @@ export default {
     async fetchData() {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
+          `/api/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
         );
-        const count = await axios.get("http://localhost:3000/api/worldnews/total");
+        const count = await axios.get("/api/worldnews/total");
         const tPage = count;
         this.totalPage = tPage.data.totalCount;
         this.worldNewsData = response.data;

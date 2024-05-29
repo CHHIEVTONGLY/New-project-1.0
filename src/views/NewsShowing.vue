@@ -79,11 +79,11 @@ export default {
 
       // Determine API endpoint based on news type
       if (newsType === "local") {
-        apiUrl = `http://localhost:3000/api/localnews/${newsId}`;
-        updateView = `http://localhost:3000/api/localnews/update/${newsId}`;
+        apiUrl = `/api/localnews/${newsId}`;
+        updateView = `/api/localnews/update/${newsId}`;
       } else if (newsType === "world") {
-        apiUrl = `http://localhost:3000/api/worldnews/${newsId}`;
-        updateView = `http://localhost:3000/api/worldnews/update/${newsId}`;
+        apiUrl = `/api/worldnews/${newsId}`;
+        updateView = `/api/worldnews/update/${newsId}`;
       } else {
         console.error("Invalid news type.");
         return;
@@ -91,7 +91,7 @@ export default {
 
       try {
         const response = await axios.get(apiUrl);
-        await axios.put(updateView)
+        await axios.put(updateView);
         this.newsData = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -25,11 +25,8 @@ export default {
   },
   methods: {
     async fetchData() {
-      const response = await axios.get(
-        "http://localhost:3000/api/localnews/few"
-      );
+      const response = await axios.get("/api/localnews/few");
       this.fewData = response.data;
-      console.log(this.fewData);
     },
     getData(news) {
       if (news) {
