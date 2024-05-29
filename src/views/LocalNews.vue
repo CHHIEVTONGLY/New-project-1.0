@@ -110,9 +110,10 @@ export default {
     async fetchData() {
       try {
         const response = await axios.get(
-          `/api/localnews/local?p=${this.currentPage}&pageSize=${this.pageSize}`
+          process.env.VUE_APP_API_URL +
+            `api/localnews/local?p=${this.currentPage}&pageSize=${this.pageSize}`
         );
-        const count = await axios.get("/api/localnews/total");
+        const count = await axios.get(process.env.VUE_APP_API_URL +"api/localnews/total");
         const tPage = count;
         this.totalPage = tPage.data.totalCount;
         this.localNewsData = response.data;

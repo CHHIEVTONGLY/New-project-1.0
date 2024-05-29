@@ -66,7 +66,7 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     async fetchData() {
-      const response = await axios.get("/api/localnews/few");
+      const response = await axios.get(process.env.VUE_APP_API_URL +"api/localnews/few");
       this.newsData = response.data;
     },
     getData(news) {

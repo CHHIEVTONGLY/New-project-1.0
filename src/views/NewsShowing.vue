@@ -79,11 +79,13 @@ export default {
 
       // Determine API endpoint based on news type
       if (newsType === "local") {
-        apiUrl = `/api/localnews/${newsId}`;
-        updateView = `/api/localnews/update/${newsId}`;
+        apiUrl = process.env.VUE_APP_API_URL + `api/localnews/${newsId}`;
+        updateView =
+          process.env.VUE_APP_API_URL + `api/localnews/update/${newsId}`;
       } else if (newsType === "world") {
-        apiUrl = `/api/worldnews/${newsId}`;
-        updateView = `/api/worldnews/update/${newsId}`;
+        apiUrl = process.env.VUE_APP_API_URL + `api/worldnews/${newsId}`;
+        updateView =
+          process.env.VUE_APP_API_URL + `api/worldnews/update/${newsId}`;
       } else {
         console.error("Invalid news type.");
         return;
