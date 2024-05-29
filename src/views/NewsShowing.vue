@@ -18,38 +18,19 @@
         Relate News
       </h1>
     </div>
+    <!-- Relate News component -->
     <div class="grid grid-cols-2 gap-4">
-      <div class="md:flex px-4 py-2 border-2">
-        <img
-          class="w-56 h-56 object-cover"
-          src="https://media.istockphoto.com/id/1369150014/vector/breaking-news-with-world-map-background-vector.jpg?s=612x612&w=0&k=20&c=9pR2-nDBhb7cOvvZU_VdgkMmPJXrBQ4rB1AkTXxRIKM="
-          alt=""
-        />
+      <div
+        v-for="x in popularPosts"
+        @click="getData(x._id)"
+        :key="x._id"
+        class="md:flex px-4 py-2 border-2"
+      >
+        <img class="w-56 h-56 object-cover" :src="x.imgUrl" alt="" />
         <div class="flex flex-col md:ml-4">
-          <h1>John Stoe | 12/23/2023</h1>
-          <strong>Title</strong>
+          <strong>{{ x.title }}</strong>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur, culpa cupiditate facere fugit sit id ullam quia rerum
-            itaque sint, sapiente, quod nesciunt aliquam. Non qui nulla
-            molestias optio architecto?
-          </p>
-        </div>
-      </div>
-      <div class="md:flex px-4 py-2 border-2">
-        <img
-          class="w-56 h-56 object-cover"
-          src="https://media.istockphoto.com/id/1369150014/vector/breaking-news-with-world-map-background-vector.jpg?s=612x612&w=0&k=20&c=9pR2-nDBhb7cOvvZU_VdgkMmPJXrBQ4rB1AkTXxRIKM="
-          alt=""
-        />
-        <div class="flex flex-col md:ml-4">
-          <h1>John Stoe | 12/23/2023</h1>
-          <strong>Title</strong>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur, culpa cupiditate facere fugit sit id ullam quia rerum
-            itaque sint, sapiente, quod nesciunt aliquam. Non qui nulla
-            molestias optio architecto?
+            {{ x.paragraph }}
           </p>
         </div>
       </div>
@@ -62,13 +43,14 @@ import axios from "axios";
 export default {
   mounted() {
     this.fetchNews();
+    this.popularPost();
   },
   data() {
     return {
       newsData: [],
+      popularPosts: [],
     };
   },
-
   methods: {
     async fetchNews() {
       const newsType = this.$route.params.newsType; // Get the news type from route params
@@ -97,6 +79,27 @@ export default {
         this.newsData = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
+      }
+    },
+    async popularPost() {
+      const response = await axios.get(
+        process.env.VUE_APP_API_URL + "api/localnews/few"
+      );
+      this.popularPosts = response.data;
+    },
+    getData(news) {
+      if (news) {
+        const newsType = "local";
+        this.$router.push({
+          name: "NewsShowing",
+          params: { newsType: newsType, id: news },
+        });
+        // Reload the page after a short delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 1); // Adjust the delay as needed
+      } else {
+        console.error("News ID is undefined or null.");
       }
     },
   },

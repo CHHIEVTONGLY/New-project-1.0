@@ -3,7 +3,7 @@
     <div
       v-for="x in newsData"
       :key="x._id"
-      class="flex flex-col md:flex-row border-2 border-black mb-4"
+      class="flex flex-col border-y-2 border-black md:flex-row md:border-2 md:border-black mb-4"
       @click="getData(x._id)"
     >
       <img
@@ -25,13 +25,13 @@
             class="group relative inline-block cursor-pointer focus:outline-none focus:ring"
           >
             <span
-              class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-yellow-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
+              class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-gray-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
             ></span>
 
             <span
               class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
             >
-              Continue reading
+              Read more
             </span>
           </button>
         </div>
@@ -53,10 +53,6 @@ export default {
     this.fetchData();
   },
   methods: {
-    click() {
-      this.$router.push({ name: "NewsShowing" });
-    },
-
     limitLength(text, maxLength) {
       if (!text) {
         return "";
@@ -66,7 +62,9 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     async fetchData() {
-      const response = await axios.get(process.env.VUE_APP_API_URL +"api/localnews/few");
+      const response = await axios.get(
+        process.env.VUE_APP_API_URL + "api/localnews/few"
+      );
       this.newsData = response.data;
     },
     getData(news) {
