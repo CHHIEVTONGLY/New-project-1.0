@@ -56,12 +56,14 @@ export default {
     click() {
       this.$router.push({ name: "NewsShowing" });
     },
+
     limitLength(text, maxLength) {
-      if (text.length <= maxLength) {
-        return text;
-      } else {
-        return text.substring(0, maxLength) + "...";
+      if (!text) {
+        return "";
       }
+      return text.length <= maxLength
+        ? text
+        : text.substring(0, maxLength) + "...";
     },
     async fetchData() {
       const response = await axios.get("/api/localnews/few");

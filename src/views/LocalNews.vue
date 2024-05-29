@@ -134,7 +134,7 @@ export default {
 
     getData(news) {
       if (news) {
-        const newsType = "local" 
+        const newsType = "local";
         this.$router.push({
           name: "NewsShowing",
           params: { newsType: newsType, id: news },
