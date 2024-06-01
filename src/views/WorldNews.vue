@@ -101,18 +101,26 @@ export default {
       totalPage: 0,
       currentPage: 1,
       pageSize: 5, // Adjust according to your backend pagination
+      pollingTimer: null,
     };
   },
   mounted() {
     this.fetchData();
+    this.pollingTimer = setInterval(this.fetchData, 60000);
+  },
+  beforeUnmount() {
+    clearInterval(this.pollingTimer);
   },
   methods: {
     async fetchData() {
       try {
         const response = await axios.get(
-          process.env.VUE_APP_API_URL +`api/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
+          process.env.VUE_APP_API_URL +
+            `api/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
         );
-        const count = await axios.get(process.env.VUE_APP_API_URL +"api/worldnews/total");
+        const count = await axios.get(
+          process.env.VUE_APP_API_URL + "api/worldnews/total"
+        );
         const tPage = count;
         this.totalPage = tPage.data.totalCount;
         this.worldNewsData = response.data;

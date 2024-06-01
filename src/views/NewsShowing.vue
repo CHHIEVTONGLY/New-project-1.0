@@ -30,7 +30,7 @@
         <div class="flex flex-col md:ml-4">
           <strong>{{ x.title }}</strong>
           <p>
-            {{ x.paragraph }}
+            {{ limitLength(x.paragraph, 150) }}
           </p>
         </div>
       </div>
@@ -44,11 +44,19 @@ export default {
   mounted() {
     this.fetchNews();
     this.popularPost();
+    this.pollingTimer = setInterval(this.fetchNews, 60000);
+    this.pollingTimer1 = setInterval(this.popularPost, 60000);
+  },
+  beforeUnmount() {
+    clearInterval(this.pollingTimer);
+    clearInterval(this.pollingTimer1);
   },
   data() {
     return {
       newsData: [],
       popularPosts: [],
+      pollingTimer: null,
+      pollingTimer1: null,
     };
   },
   methods: {
@@ -101,6 +109,15 @@ export default {
       } else {
         console.error("News ID is undefined or null.");
       }
+    },
+
+    limitLength(text, maxLength) {
+      if (!text) {
+        return "";
+      }
+      return text.length <= maxLength
+        ? text
+        : text.substring(0, maxLength) + "...";
     },
   },
 };
