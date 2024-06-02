@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       localNewsData: [],
-      currentPage : 1,
+      currentPage: 1,
       totalPage: 0,
       pageSize: 5, // Adjust according to your backend pagination
       pollingTimer: null,
@@ -129,7 +129,7 @@ export default {
         const count = await axios.get(
           process.env.VUE_APP_API_URL + "api/localnews/total"
         );
-        this.totalPage = Math.ceil(count.data.totalCount / this.pageSize);
+        this.totalPage = Math.ceil(count.data.totalCount);
         this.localNewsData = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -137,7 +137,7 @@ export default {
     },
 
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5) this.currentPage++;
+      if (this.currentPage <( this.totalPage / 5)-1) this.currentPage++;
       this.fetchData();
       sessionStorage.setItem("currentPage", this.currentPage);
       this.$router.push(`/local/page/${this.currentPage}`);

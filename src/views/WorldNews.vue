@@ -156,7 +156,7 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5) this.currentPage++;
+      if (this.currentPage < (this.totalPage / 5)-1) this.currentPage++;
       sessionStorage.setItem("currentWorldPage", this.currentPage);
       this.fetchData();
       this.$router.push(`/world/page/${this.currentPage}`);
