@@ -98,6 +98,7 @@ export default {
   data() {
     return {
       localNewsData: [],
+      currentPage : 1,
       totalPage: 0,
       pageSize: 5, // Adjust according to your backend pagination
       pollingTimer: null,
@@ -136,12 +137,10 @@ export default {
     },
 
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5) {
-        this.currentPage++;
-        this.fetchData();
-        sessionStorage.setItem("currentPage", this.currentPage);
-        this.$router.push(`/local/page/${this.currentPage}`);
-      }
+      if (this.currentPage < this.totalPage / 5) this.currentPage++;
+      this.fetchData();
+      sessionStorage.setItem("currentPage", this.currentPage);
+      this.$router.push(`/local/page/${this.currentPage}`);
     },
     async prevPage() {
       if (this.currentPage > 1) {
