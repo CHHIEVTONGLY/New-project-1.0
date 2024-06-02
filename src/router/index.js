@@ -12,24 +12,24 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/showing/:newsType/:id", 
+    path: "/showing/:newsType/:id",
     name: "NewsShowing",
     component: NewsShowing,
   },
   {
-    path: "/local",
+    path: "/local/page/:page",
     name: "LocalNews",
     component: LocalNews,
   },
   {
-    path: "/world",
+    path: "/world/page/:page",
     name: "WorldNews",
     component: WorldNews,
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.VUE_APP_API_URL),
   routes,
 });
 

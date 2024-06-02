@@ -105,6 +105,10 @@ export default {
     };
   },
   mounted() {
+    const storedPage = parseInt(sessionStorage.getItem("currentWorldPage"));
+    if (!isNaN(storedPage)) {
+      this.currentPage = storedPage;
+    }
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
@@ -116,13 +120,15 @@ export default {
       try {
         const response = await axios.get(
           process.env.VUE_APP_API_URL +
-            `api/worldnews/world?p=${this.currentPage}&pageSize=${this.pageSize}`
+            `api/worldnews/world/page/${this.currentPage}`,
+          {
+            params: { page: this.currentPage },
+          }
         );
         const count = await axios.get(
           process.env.VUE_APP_API_URL + "api/worldnews/total"
         );
-        const tPage = count;
-        this.totalPage = tPage.data.totalCount;
+        this.totalPage = count.data.totalCount;
         this.worldNewsData = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -151,12 +157,16 @@ export default {
     },
     async nextPage() {
       if (this.currentPage < this.totalPage / 5) this.currentPage++;
+      sessionStorage.setItem("currentWorldPage", this.currentPage);
       this.fetchData();
+      this.$router.push(`/world/page/${this.currentPage}`);
     },
     async prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
+        sessionStorage.setItem("currentWorldPage", this.currentPage);
         this.fetchData();
+        this.$router.push(`/world/page/${this.currentPage}`);
       }
     },
   },

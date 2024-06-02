@@ -99,12 +99,16 @@ export default {
     return {
       localNewsData: [],
       totalPage: 0,
-      currentPage: 1,
       pageSize: 5, // Adjust according to your backend pagination
       pollingTimer: null,
     };
   },
+
   mounted() {
+    const storedPage = parseInt(sessionStorage.getItem("currentPage"));
+    if (!isNaN(storedPage)) {
+      this.currentPage = storedPage;
+    }
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
@@ -116,13 +120,15 @@ export default {
       try {
         const response = await axios.get(
           process.env.VUE_APP_API_URL +
-            `api/localnews/local?p=${this.currentPage}&pageSize=${this.pageSize}`
+            `api/localnews/local/page/${this.currentPage}/`,
+          {
+            params: { page: this.currentPage },
+          }
         );
         const count = await axios.get(
           process.env.VUE_APP_API_URL + "api/localnews/total"
         );
-        const tPage = count;
-        this.totalPage = tPage.data.totalCount;
+        this.totalPage = Math.ceil(count.data.totalCount / this.pageSize);
         this.localNewsData = response.data;
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -130,13 +136,18 @@ export default {
     },
 
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5) this.currentPage++;
-      this.fetchData();
+      if (this.currentPage < this.totalPage / 5) {
+        this.currentPage++;
+        this.fetchData();
+        sessionStorage.setItem("currentPage", this.currentPage);
+        this.$router.push(`/local/page/${this.currentPage}`);
+      }
     },
     async prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
         this.fetchData();
+        this.$router.push(`/local/page/${this.currentPage}`);
       }
     },
 
