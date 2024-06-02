@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Admin dashboard frontend
+>[!IMPORTANT]
+>You can check admin dashboard repo here [Admin dashboard](https://github.com/CHHIEVTONGLY/Admin-Frontend)
