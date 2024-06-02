@@ -112,6 +112,9 @@ export default {
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
+  updated() {
+    sessionStorage.removeItem("currentWorldPage");
+  },
   beforeUnmount() {
     clearInterval(this.pollingTimer);
   },
@@ -156,10 +159,11 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     async nextPage() {
-      if (this.currentPage < (this.totalPage / 5)-1) this.currentPage++;
+      if (this.currentPage < this.totalPage / 5 - 1) this.currentPage++;
       sessionStorage.setItem("currentWorldPage", this.currentPage);
       this.fetchData();
       this.$router.push(`/world/page/${this.currentPage}`);
+      this.scrollToTop();
     },
     async prevPage() {
       if (this.currentPage > 1) {
@@ -167,7 +171,15 @@ export default {
         sessionStorage.setItem("currentWorldPage", this.currentPage);
         this.fetchData();
         this.$router.push(`/world/page/${this.currentPage}`);
+        this.scrollToTop();
       }
+    },
+    scrollToTop() {
+      console.log("Scrolling to top");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Optional, smooth scrolling behavior
+      });
     },
   },
 };

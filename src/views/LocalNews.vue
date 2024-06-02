@@ -113,6 +113,9 @@ export default {
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
+  updated() {
+    sessionStorage.removeItem("currentPage");
+  },
   beforeUnmount() {
     clearInterval(this.pollingTimer);
   },
@@ -137,16 +140,18 @@ export default {
     },
 
     async nextPage() {
-      if (this.currentPage <( this.totalPage / 5)-1) this.currentPage++;
+      if (this.currentPage < this.totalPage / 5 - 1) this.currentPage++;
       this.fetchData();
       sessionStorage.setItem("currentPage", this.currentPage);
       this.$router.push(`/local/page/${this.currentPage}`);
+      this.scrollToTop();
     },
     async prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
         this.fetchData();
         this.$router.push(`/local/page/${this.currentPage}`);
+        this.scrollToTop();
       }
     },
 
@@ -169,6 +174,13 @@ export default {
       return text.length <= maxLength
         ? text
         : text.substring(0, maxLength) + "...";
+    },
+    scrollToTop() {
+      console.log("Scrolling to top");
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Optional, smooth scrolling behavior
+      });
     },
   },
 };
