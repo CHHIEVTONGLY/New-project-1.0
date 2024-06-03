@@ -11,6 +11,7 @@ module.exports = {
         largest: "5rem",
         larger: "24px",
         larger_1: "36px",
+        smallest : "12px"
       },
 
       maxWidth: {
@@ -21,6 +22,10 @@ module.exports = {
       },
       borderWidth: {
         _1: "1.5px",
+      },
+      borderRadius: {
+        _2lg: "20px",
+        _5lg:"45px"
       },
     },
   },

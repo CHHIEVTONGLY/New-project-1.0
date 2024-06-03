@@ -1,86 +1,96 @@
 <template>
-    <div>
-      <div
-        v-for="x in newsData"
-        :key="x._id"
-        class="flex flex-col md:flex-row border-2 border-black mb-4"
-        @click="getData(x._id)"
+  <div class="grid grid-cols-1 px-2">
+    <div class="flex p-4">
+      <router-link
+        to="/world/page/1"
+        class="text-larger cursor-pointer font-bold font-Helvetica"
+        >World News</router-link
       >
+    </div>
+    <!-- Component -->
+    <div
+      v-for="x in newsData"
+      :key="x._id"
+      @click="getData(x._id)"
+      class="flex flex-row border-2 p-2 border-gray-100 rounded-_2lg bg-gray-100 mt-2 mb-2"
+    >
+      <div class="basis-1/3">
         <img
+          class="w-24 h-24 ml-2 object-cover rounded-_2lg"
           :src="x.imgUrl"
-          alt="news-img"
-          class="object-cover w-full md:max-w-xs h-56"
+          alt=""
         />
-        <div class="flex flex-col justify-between p-4">
-          <div>
-            <p class="text-gray-500">{{ x.time }}</p>
-            <h1 class="text-xl font-bold">{{ limitLength(x.title, 50) }}</h1>
-            <p>
-              {{ limitLength(x.paragraph, 150) }}
-            </p>
-          </div>
-          <div class="mt-4 md:mt-auto">
-            <!-- This div will stay at the bottom -->
-            <button
-              class="group relative inline-block cursor-pointer focus:outline-none focus:ring"
-            >
-              <span
-                class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-gray-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
-              ></span>
-  
-              <span
-                class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
-              >
-                Read more
-              </span>
-            </button>
-          </div>
+      </div>
+      <div class="flex flex-col justify-between basis-3/4 p-2">
+        <div>
+          <h1 class="font-bold font-Helvetica">
+            {{ limitLength(x.title, 50) }}
+          </h1>
+          <p>{{ limitLength(x.paragraph, 50) }}</p>
         </div>
+        <span class="flex justify-end text-gray-400">
+          <span class="mt-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1rem"
+              height="1rem"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16m1-8h4v2h-6V7h2z"
+              />
+            </svg>
+          </span>
+          {{ x.date }}</span
+        >
       </div>
     </div>
-  </template>
-  
-  <script>
-  import axios from "axios";
-  export default {
-    data() {
-      return {
-        newsData: [],
-        popularData: [],
-      };
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      newsData: [],
+      popularData: [],
+    };
+  },
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    click() {
+      this.$router.push({ name: "NewsShowing" });
     },
-    mounted() {
-      this.fetchData();
+
+    limitLength(text, maxLength) {
+      if (!text) {
+        return "";
+      }
+      return text.length <= maxLength
+        ? text
+        : text.substring(0, maxLength) + "...";
     },
-    methods: {
-      click() {
-        this.$router.push({ name: "NewsShowing" });
-      },
-  
-      limitLength(text, maxLength) {
-        if (!text) {
-          return "";
-        }
-        return text.length <= maxLength
-          ? text
-          : text.substring(0, maxLength) + "...";
-      },
-      async fetchData() {
-        const response = await axios.get(process.env.VUE_APP_API_URL +"api/worldnews/post/few");
-        this.newsData = response.data;
-      },
-      getData(news) {
-        if (news) {
-          const newsType = "world";
-          this.$router.push({
-            name: "NewsShowing",
-            params: { newsType: newsType, id: news },
-          });
-        } else {
-          console.error("News ID is undefined or null.");
-        }
-      },
+    async fetchData() {
+      const response = await axios.get(
+        process.env.VUE_APP_API_URL + "api/worldnews/post/few"
+      );
+      this.newsData = response.data;
     },
-  };
-  </script>
-  
+    getData(news) {
+      if (news) {
+        const newsType = "world";
+        this.$router.push({
+          name: "NewsShowing",
+          params: { newsType: newsType, id: news },
+        });
+      } else {
+        console.error("News ID is undefined or null.");
+      }
+    },
+  },
+};
+</script>

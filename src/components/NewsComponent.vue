@@ -1,40 +1,66 @@
 <template>
-  <div>
+  <div class="grid grid-cols-1 px-2">
+    <!-- Big Header -->
+    <div @click="getData(headerData._id)" class="relative rounded-lg mt-4">
+      <!-- Image -->
+      <img
+        class="w-full h-72 object-cover inset-0 filter brightness-75 rounded-_2lg"
+        :src="headerData.imgUrl"
+        alt="Image"
+      />
+
+      <!-- Title container -->
+      <div
+        class="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 rounded-b-_2lg"
+      >
+        <h1 class="text-white text-xl font-bold">{{ headerData.title }}</h1>
+      </div>
+    </div>
+    <!-- local news title -->
+    <div class="flex p-4">
+      <router-link
+        to="/local/page/1"
+        class="text-larger cursor-pointer font-bold font-Helvetica"
+        >Local news</router-link
+      >
+    </div>
+    <!-- Component -->
     <div
       v-for="x in newsData"
       :key="x._id"
-      class="flex flex-col border-y-2 border-black md:flex-row md:border-2 md:border-black mb-4"
       @click="getData(x._id)"
+      class="flex flex-row border-2 p-2 border-gray-100 rounded-_2lg bg-gray-100 mt-2 mb-2"
     >
-      <img
-        :src="x.imgUrl"
-        alt="news-img"
-        class="object-cover w-full md:max-w-xs h-56"
-      />
-      <div class="flex flex-col justify-between p-4">
+      <div class="basis-1/3">
+        <img
+          class="w-24 h-24 ml-2 object-cover rounded-_2lg"
+          :src="x.imgUrl"
+          alt=""
+        />
+      </div>
+      <div class="flex flex-col justify-between basis-3/4 p-2">
         <div>
-          <p class="text-gray-500">{{ x.time }}</p>
-          <h1 class="text-xl font-bold">{{ limitLength(x.title, 50) }}</h1>
-          <p>
-            {{ limitLength(x.paragraph, 150) }}
-          </p>
+          <h1 class="font-bold font-Helvetica">
+            {{ limitLength(x.title, 50) }}
+          </h1>
+          <p>{{ limitLength(x.paragraph, 50) }}</p>
         </div>
-        <div class="mt-4 md:mt-auto">
-          <!-- This div will stay at the bottom -->
-          <button
-            class="group relative inline-block cursor-pointer focus:outline-none focus:ring"
-          >
-            <span
-              class="absolute inset-0 translate-x-1.5 translate-y-1.5 bg-gray-300 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"
-            ></span>
-
-            <span
-              class="relative inline-block border-2 border-current px-8 py-3 text-sm font-bold uppercase tracking-widest text-black group-active:text-opacity-75"
+        <span class="flex justify-end text-gray-400 text-smallest">
+          <span class="mt-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
             >
-              Read more
-            </span>
-          </button>
-        </div>
+              <path
+                fill="currentColor"
+                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m0-2a8 8 0 1 0 0-16a8 8 0 0 0 0 16m1-8h4v2h-6V7h2z"
+              />
+            </svg>
+          </span>
+          {{ x.date }}</span
+        >
       </div>
     </div>
   </div>
@@ -47,6 +73,8 @@ export default {
     return {
       newsData: [],
       popularData: [],
+      headerData: [],
+      dataIndex: 0,
     };
   },
   mounted() {
@@ -66,6 +94,16 @@ export default {
         process.env.VUE_APP_API_URL + "api/localnews/few"
       );
       this.newsData = response.data;
+
+      const header = await axios.get(
+        process.env.VUE_APP_API_URL + "api/localnews/date/sort"
+      );
+      this.headerData = header.data[this.dataIndex];
+      setInterval(() => {
+        // Increment headerData index and reset to 0 if it reaches 5
+        this.dataIndex = (this.dataIndex + 1) % 5;
+        this.headerData = header.data[this.dataIndex];
+      }, 5000);
     },
     getData(news) {
       if (news) {
