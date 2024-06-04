@@ -1,6 +1,6 @@
 <template>
-  <div class="md:px-16 md:py-12 flex flex-col md:flex-row md:gap-2">
-    <div class="md:basis-3/4">
+  <div class="md:px-12 md:py-12 flex flex-col md:flex-row md:gap-2">
+    <div class="md:basis-3/4 shadow-lg">
       <!-- recently News -->
       <div>
         <news-component></news-component>
