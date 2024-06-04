@@ -2,7 +2,7 @@
   <div
     v-for="x in worldNewsData"
     :key="x._id"
-    class="flex flex-col p-4 md:flex-row cursor-pointer group"
+    class="flex flex-col p-4 border-b-2 border-gray-300  md:flex-row cursor-pointer group"
     @click="getData(x._id)"
   >
     <img
@@ -10,7 +10,7 @@
       alt="news-img"
       class="object-cover w-full h-56 md:max-w-xs hover:opacity-75"
     />
-    <div class="flex flex-col border-b-2 border-gray-300 justify-between p-4">
+    <div class="flex flex-col  justify-between p-4">
       <div>
         <p class="text-gray-500">{{ x.time }}</p>
         <h1 class="text-xl font-bold group-hover:underline group-hover:decoration-solid ">{{ limitLength(x.title, 100) }}</h1>
