@@ -13,7 +13,11 @@
     <div class="flex flex-col border-b-2 border-gray-300 justify-between p-4">
       <div>
         <p class="text-gray-500">{{ x.time }}</p>
-        <h1 class="text-xl font-bold group-hover:underline group-hover:decoration-solid ">{{ limitLength(x.title, 100) }}</h1>
+        <h1
+          class="text-xl font-bold group-hover:underline group-hover:decoration-solid"
+        >
+          {{ limitLength(x.title, 100) }}
+        </h1>
         <p>
           {{ limitLength(x.paragraph, 200) }}
         </p>
@@ -101,9 +105,7 @@ export default {
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
-  updated() {
-    sessionStorage.removeItem("currentPage");
-  },
+
   beforeUnmount() {
     clearInterval(this.pollingTimer);
   },
@@ -164,7 +166,6 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     scrollToTop() {
-      console.log("Scrolling to top");
       window.scrollTo({
         top: 0,
         behavior: "smooth", // Optional, smooth scrolling behavior

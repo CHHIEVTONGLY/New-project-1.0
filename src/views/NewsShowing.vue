@@ -1,10 +1,10 @@
 <template>
   <div class="border-b-2 pb-4 md:p-24">
-    <div class="p-6 md:p-12 border-2 border-black flex flex-col md:flex-row">
-      <img :src="newsData.imgUrl" alt="" class="w-full md:w-1/3 object-cover" />
+    <div class="p-6 md:p-12 shadow-lg rounded-lg flex flex-col md:flex-row">
+      <img :src="newsData.imgUrl" alt="" class="w-full h-72 rounded-_5lg md:rounded-lg md:w-1/3 object-cover" />
       <div class="flex flex-col ml-0 md:ml-4 mt-4 md:mt-0">
-        <h1 class="text-gray-500">{{ newsData.time }}</h1>
-        <h1 class="font-bold text-xl md:text-2xl">{{ newsData.title }}</h1>
+        <h1 class="text-gray-500">{{ newsData.date }}</h1>
+        <h1 class="font-bold text-3xl md:text-5xl">{{ newsData.title }}</h1>
         <p class="mt-2">
           {{ newsData.paragraph }}
         </p>
@@ -13,24 +13,24 @@
         </div>
       </div>
     </div>
-    <div class="py-10">
-      <h1 class="text-larger font-Helvetica border-b-_1 border-black">
+    <div class="py-10 ml-4">
+      <h1 class="text-larger font-Helvetica border-b-_1 border-gray-300">
         Relate News
       </h1>
     </div>
     <!-- Relate News component -->
-    <div class="grid grid-cols-2 gap-4">
+    <div class=" md:grid md:grid-cols-2 ">
       <div
         v-for="x in popularPosts"
         @click="getData(x._id)"
         :key="x._id"
-        class="md:flex px-4 py-2 border-2"
+        class=" flex flex-row px-4 py-2 border-b-2"
       >
-        <img class="w-56 h-56 object-cover" :src="x.imgUrl" alt="" />
-        <div class="flex flex-col md:ml-4">
+        <img class="w-20 h-20 object-cover rounded-lg" :src="x.imgUrl" alt="" />
+        <div class="flex flex-col mx-4 md:ml-4 ">
           <strong>{{ x.title }}</strong>
           <p>
-            {{ limitLength(x.paragraph, 150) }}
+            {{ limitLength(x.paragraph, 40) }}
           </p>
         </div>
       </div>

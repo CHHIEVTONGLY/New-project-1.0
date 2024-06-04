@@ -100,9 +100,6 @@ export default {
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
   },
-  updated() {
-    sessionStorage.removeItem("currentWorldPage");
-  },
   beforeUnmount() {
     clearInterval(this.pollingTimer);
   },

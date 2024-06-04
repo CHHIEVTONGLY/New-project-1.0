@@ -23,7 +23,7 @@
       <div class="flex p-4">
         <router-link
           to="/local/page/1"
-          class="text-larger cursor-pointer font-bold font-Helvetica"
+          class="text-larger cursor-pointer font-bold font-Helvetica hover:underline hover:decoration-solid"
           >Local news</router-link
         >
       </div>
@@ -33,7 +33,7 @@
           v-for="x in newsData"
           :key="x._id"
           @click="getData(x._id)"
-          class="flex flex-row border-2 p-2 border-gray-100 rounded-_2lg bg-gray-100 mt-2 mb-2 md:p-0 md:grid md:rounded-none md:flex-col"
+          class="flex flex-row border-2 p-2 border-gray-100 rounded-_2lg bg-gray-100 my-2 cursor-pointer md:p-0 md:grid md:rounded-none md:flex-col"
         >
           <div class="basis-1/3">
             <img
