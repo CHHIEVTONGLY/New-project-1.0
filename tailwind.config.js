@@ -5,6 +5,8 @@ module.exports = {
     fontFamily: {
       Helvetica: "Helvetica",
       Roboto: "Roboto",
+      KhmerTitle : "Kantumruy Pro ",
+      KhmerParagraph : "Kantumruy Pro"
     },
     extend: {
       fontSize: {

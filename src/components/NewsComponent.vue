@@ -13,7 +13,7 @@
       <div
         class="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 rounded-b-_2lg"
       >
-        <h1 class="text-white text-xl font-bold">{{ headerData.title }}</h1>
+        <h1 class="text-white text-xl font-bold font-KhmerTitle">{{ headerData.title }}</h1>
       </div>
     </div>
 

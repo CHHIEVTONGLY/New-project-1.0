@@ -8,9 +8,9 @@
       />
       <div class="flex flex-col ml-0 md:ml-4 mt-4 md:mt-0">
         <h1 class="text-gray-500">{{ newsData.date }}</h1>
-        <h1 class="font-bold text-2xl md:text-3xl">{{ newsData.title }}</h1>
+        <h1 class="font-bold font-KhmerTitle text-2xl md:text-3xl">{{ newsData.title }}</h1>
         <p
-          class="mt-2 text-lg"
+          class="mt-2 text-lg font-KhmerParagraph"
           v-html="formatParagraph(newsData.paragraph)"
         ></p>
         <div class="mt-auto">

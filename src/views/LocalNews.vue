@@ -14,11 +14,11 @@
       <div>
         <p class="text-gray-500">{{ x.time }}</p>
         <h1
-          class="text-xl font-bold group-hover:underline group-hover:decoration-solid"
+          class="text-xl font-bold font-KhmerTitle group-hover:underline group-hover:decoration-solid"
         >
           {{ limitLength(x.title, 100) }}
         </h1>
-        <p>
+        <p class="font-KhmerParagraph">
           {{ limitLength(x.paragraph, 200) }}
         </p>
       </div>
