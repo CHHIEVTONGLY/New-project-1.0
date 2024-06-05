@@ -130,19 +130,23 @@ export default {
     },
 
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5 - 1) this.currentPage++;
-      this.fetchData();
-      sessionStorage.setItem("currentPage", this.currentPage);
-      this.$router.push(`/local/page/${this.currentPage}`);
-      this.scrollToTop();
+      if (this.currentPage < this.totalPage / 10) {
+        this.currentPage++;
+        await this.updatePage();
+      }
     },
     async prevPage() {
       if (this.currentPage > 1) {
         this.currentPage--;
-        this.fetchData();
-        this.$router.push(`/local/page/${this.currentPage}`);
-        this.scrollToTop();
+        await this.updatePage();
       }
+    },
+
+    async updatePage() {
+      await this.fetchData();
+      sessionStorage.setItem("currentPage", this.currentPage);
+      this.$router.push(`/local/page/${this.currentPage}`);
+      this.scrollToTop();
     },
 
     getData(news) {

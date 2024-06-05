@@ -2,7 +2,7 @@
   <div
     v-for="x in worldNewsData"
     :key="x._id"
-    class="flex flex-col p-4 border-b-2 border-gray-300  md:flex-row cursor-pointer group"
+    class="flex flex-col p-4 border-b-2 border-gray-300 md:flex-row cursor-pointer group"
     @click="getData(x._id)"
   >
     <img
@@ -10,10 +10,14 @@
       alt="news-img"
       class="object-cover w-full h-56 md:max-w-xs hover:opacity-75"
     />
-    <div class="flex flex-col  justify-between p-4">
+    <div class="flex flex-col justify-between p-4">
       <div>
         <p class="text-gray-500">{{ x.time }}</p>
-        <h1 class="text-xl font-bold group-hover:underline group-hover:decoration-solid ">{{ limitLength(x.title, 100) }}</h1>
+        <h1
+          class="text-xl font-bold group-hover:underline group-hover:decoration-solid"
+        >
+          {{ limitLength(x.title, 100) }}
+        </h1>
         <p>
           {{ limitLength(x.paragraph, 200) }}
         </p>
@@ -53,7 +57,7 @@
           type="number"
           class="h-8 w-12 rounded border border-gray-100 bg-white p-0 text-center text-xs font-medium text-gray-900 [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
           min="1"
-          :value="currentPage"
+          :value="currentWorldPage"
           id="PaginationPage"
         />
       </div>
@@ -87,7 +91,7 @@ export default {
     return {
       worldNewsData: [],
       totalPage: 0,
-      currentPage: 1,
+      currentWorldPage: 1,
       pageSize: 5, // Adjust according to your backend pagination
       pollingTimer: null,
     };
@@ -95,7 +99,7 @@ export default {
   mounted() {
     const storedPage = parseInt(sessionStorage.getItem("currentWorldPage"));
     if (!isNaN(storedPage)) {
-      this.currentPage = storedPage;
+      this.currentWorldPage = storedPage;
     }
     this.fetchData();
     this.pollingTimer = setInterval(this.fetchData, 60000);
@@ -108,9 +112,9 @@ export default {
       try {
         const response = await axios.get(
           process.env.VUE_APP_API_URL +
-            `api/worldnews/world/page/${this.currentPage}`,
+            `api/worldnews/world/page/${this.currentWorldPage}`,
           {
-            params: { page: this.currentPage },
+            params: { page: this.currentWorldPage },
           }
         );
         const count = await axios.get(
@@ -144,21 +148,24 @@ export default {
         : text.substring(0, maxLength) + "...";
     },
     async nextPage() {
-      if (this.currentPage < this.totalPage / 5 - 1) this.currentPage++;
-      sessionStorage.setItem("currentWorldPage", this.currentPage);
-      this.fetchData();
-      this.$router.push(`/world/page/${this.currentPage}`);
-      this.scrollToTop();
-    },
-    async prevPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        sessionStorage.setItem("currentWorldPage", this.currentPage);
-        this.fetchData();
-        this.$router.push(`/world/page/${this.currentPage}`);
-        this.scrollToTop();
+      if (this.currentWorldPage < this.totalPage / 10) {
+        this.currentWorldPage++;
+        await this.updatePage();
       }
     },
+    async prevPage() {
+      if (this.currentWorldPage > 1) {
+        await this.updatePage();
+      }
+    },
+
+    async updatePage() {
+      await this.fetchData();
+      sessionStorage.setItem("currentWorldPage", this.currentWorldPage);
+      this.$router.push(`/world/page/${this.currentWorldPage}`);
+      this.scrollToTop();
+    },
+
     scrollToTop() {
       console.log("Scrolling to top");
       window.scrollTo({
