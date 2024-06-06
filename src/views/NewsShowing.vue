@@ -1,14 +1,16 @@
 <template>
   <div class="border-b-2 pb-4 md:p-24">
-    <div class="p-6 md:p-12 shadow-lg rounded-lg flex flex-col md:flex-row">
+    <div class="p-6 md:p-12 shadow-lg rounded-lg flex flex-col">
       <img
         :src="newsData.imgUrl"
         alt=""
-        class="w-full h-72 rounded-_5lg md:rounded-lg md:w-1/3 object-cover"
+        class="w-full h-72 md:h-larger rounded-_5lg object-cover"
       />
       <div class="flex flex-col ml-0 md:ml-4 mt-4 md:mt-0">
         <h1 class="text-gray-500">{{ newsData.date }}</h1>
-        <h1 class="font-bold font-KhmerTitle text-2xl md:text-3xl">{{ newsData.title }}</h1>
+        <h1 class="font-bold font-KhmerTitle text-2xl md:text-3xl">
+          {{ newsData.title }}
+        </h1>
         <p
           class="mt-2 text-lg font-KhmerParagraph"
           v-html="formatParagraph(newsData.paragraph)"
