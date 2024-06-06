@@ -7,26 +7,11 @@
 ## Admin dashboard frontend
 >[!IMPORTANT]
 >You can check admin dashboard repo here [Admin dashboard](https://github.com/CHHIEVTONGLY/Admin-Frontend)
+>
+>Click here for Frontend video : [Frontend video](https://youtu.be/spmxvcVNz1w)
+>
+>Click here for Admin dashboard video : [Admin dashboard video](https://youtu.be/4yR6R_DCa_4)
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
